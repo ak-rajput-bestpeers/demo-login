@@ -1,5 +1,9 @@
 class Api::V1::ApiController < ActionController::API
-  SECRET_KEY = Rails.application.secrets.secret_key_base
+  if Rails.env == "production"
+    SECRET_KEY = Rails.application.secret_key_base
+  else
+    SECRET_KEY = Rails.application.secrets.secret_key_base
+  end
 
   def authorize_request
     header = request.headers['Authorization']

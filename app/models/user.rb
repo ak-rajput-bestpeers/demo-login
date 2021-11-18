@@ -6,5 +6,6 @@ class User < ApplicationRecord
 
   def valid_password?(password)
     Devise::Encryptor.compare(self.class, encrypted_password, password)
-  end      
+  end
+  
 end

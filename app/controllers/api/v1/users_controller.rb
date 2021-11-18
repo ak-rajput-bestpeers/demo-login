@@ -12,7 +12,6 @@ class Api::V1::UsersController < Api::V1::ApiController
     end
   end
 
-  # POST /api/users/login
   def login
     @user = User.find_by_email(params[:email])
     if @user && @user.valid_password?(params[:password])

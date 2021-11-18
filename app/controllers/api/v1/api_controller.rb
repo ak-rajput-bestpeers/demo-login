@@ -7,8 +7,8 @@ class Api::V1::ApiController < ActionController::API
 
     header = header.split(' ').last if header
     begin
-      @decoded = decode(header)
-      @current_user = User.find_by_id(@decoded[:user_id])
+      decoded = decode(header)
+      @current_user = User.find_by_id(decoded[:user_id])
     rescue ActiveRecord::RecordNotFound => e
       render json: { errors: e.message }, status: :unauthorized
     rescue JWT::DecodeError => e

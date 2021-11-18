@@ -24,8 +24,8 @@ class Api::V1::UsersController < Api::V1::ApiController
 
 
   def reset_password
-    if @current_user.valid_password?(user_params[:old_password]).present?
-      @current_user.update(password:user_params[:new_password])
+    if @current_user.valid_password?(reset_password_params[:old_password]).present?
+      @current_user.update(password:reset_password_params[:new_password])
       render json: { success:true,message: "Password Change Successfully, Please login again to continue" }
     else
       render json: { success:false,message: "Old Password Is Wrong" }
@@ -38,7 +38,7 @@ class Api::V1::UsersController < Api::V1::ApiController
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
 
-  def user_params
+  def reset_password_params
     params.require(:user).permit(:email, :old_password, :new_password)
   end
 
